@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播图</title>
+    <style>
+        main{
+            width: 100%;
+            height: 800px;
+            border: 1px solid red;
+        }
+        main div{
+            width: 800px;
+            height: 300px;
+            position: relative;
+            margin: 0 auto;
+        }
+        img{
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transition: opacity 0.8s linear;
+        }
+        .current{
+            opacity: 1;
+            transition: opacity 0.8s linear;
+        }
+        ul{
+            position: absolute;
+            top: 240px;
+            right: 20px;
+            cursor: default;
+        }
+        li{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border: 1px solid black;
+            list-style: none;
+            font-size: 10px;
+            line-height: 10px;
+            text-align: center;
+            background-color: blanchedalmond;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <div id="order">
+            <img src="img/1.jpg" alt="">
+            <img src="img/2.jpg" alt="">
+            <img src="img/3.jpg" alt="">
+            <img src="img/4.jpg" alt="">
+            <img src="img/5.jpg" alt="">
+            <img src="img/6.jpg" alt="">
+
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+            </ul>
+        </div>
+    </main>
+
+    <script> 
+    var img =  document.getElementsByTagName('img')
+    var li = document.getElementsByTagName('li')
+    li[0].style.backgroundColor = 'orange'
+    img[0].classList.add('current')
+    var index = 0
+    function lunbo(){
+        img[index].classList.remove('current')
+        li[index].style.backgroundColor = ''
+        index++
+        if(index == img.length)index = 0
+        li[index].style.backgroundColor = 'orange'
+        img[index].classList.add('current')
+    }
+    var timer = setInterval(lunbo,3000)
+    for(let i=0;i<li.length;i++){
+        li[i].num = i
+        li[i].onmouseover = function(){
+            clearInterval(timer)
+            li[index].style.backgroundColor = ''
+            img[index].classList.remove('current')
+            li[this.num].style.backgroundColor = 'orange'
+            img[this.num].classList.add('current')
+            index = this.num
+        }
+        li[i].onmouseleave = function(){
+            timer = setInterval(lunbo,3000)
+        }
+    }
+
+
+    
+
+
+
+
+    </script>
+    
+</body>
+</html>
